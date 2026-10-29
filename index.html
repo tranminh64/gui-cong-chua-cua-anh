@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gửi Hiền bé bỏng của anh 🌸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --peach: #ffb7b2;
+      --soft-pink: #ffd3d0;
+      --deep-peach: #e07a5f;
+      --cream: #fffdf9;
+      --warm-bg: #fff8f5;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --text-main: #4a3e3d;
+      --text-sub: #7d6b69;
+      --accent: #f28482;
+      --shadow-sm: 0 4px 15px rgba(224, 122, 95, 0.12);
+      --shadow-md: 0 8px 25px rgba(224, 122, 95, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(175deg, #fff2ed 0%, #fff8f5 40%, #ffedea 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 16px 40px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Falling Petals & Hearts Background */
+    #petals-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Mobile Container */
+    .mobile-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* Floating Music Control Button */
+    .music-btn {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 99;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid #ffccd2;
+      border-radius: 50%;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .music-btn.playing {
+      animation: pulse-music 1.8s infinite ease-in-out;
+      background: #ffe3e3;
+      border-color: var(--accent);
+    }
+
+    @keyframes pulse-music {
+
+      0%,
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(242, 132, 130, 0.4);
+      }
+
+      50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 18px rgba(242, 132, 130, 0.7);
+      }
+    }
+
+    /* Header Greeting */
+    .header-card {
+      text-align: center;
+      padding: 24px 18px 16px;
+      background: var(--card-bg);
+      border-radius: 28px;
+      border: 1px solid rgba(255, 204, 210, 0.6);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(10px);
+      animation: fadeInDown 0.9s ease;
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: #ffe8e6;
+      color: #df6866;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: #9c4146;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .header-title .hien-name {
+      background: linear-gradient(45deg, #e07a5f, #ea5a6d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Caveat', cursive;
+      font-size: 38px;
+      display: inline-block;
+      vertical-align: middle;
+      font-weight: 700;
+    }
+
+    .header-sub {
+      font-size: 14.5px;
+      color: var(--text-sub);
+      line-height: 1.55;
+    }
+
+    /* Interactive Envelope Section */
+    .letter-section {
+      perspective: 1000px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .envelope-box {
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 22px 20px;
+      box-shadow: var(--shadow-md);
+      border: 1.5px solid #ffccd2;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .envelope-box:hover,
+    .envelope-box:active {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(224, 122, 95, 0.22);
+    }
+
+    .envelope-visual {
+      position: relative;
+      width: 100px;
+      height: 75px;
+      background: #fca5a5;
+      border-radius: 12px;
+      margin: 10px auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px rgba(242, 132, 130, 0.35);
+      transition: transform 0.5s ease;
+    }
+
+    .envelope-visual::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-top: 42px solid #f87171;
+      transform-origin: top;
+      transition: transform 0.5s ease;
+      z-index: 2;
+    }
+
+    .envelope-box.opened .envelope-visual::before {
+      transform: rotateX(180deg);
+      border-top-color: #ef4444;
+    }
+
+    .envelope-seal {
+      position: relative;
+      z-index: 3;
+      font-size: 26px;
+      animation: heartbeat 1.6s infinite;
+    }
+
+    @keyframes heartbeat {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      14% {
+        transform: scale(1.22);
+      }
+
+      28% {
+        transform: scale(1);
+      }
+
+      42% {
+        transform: scale(1.18);
+      }
+
+      70% {
+        transform: scale(1);
+      }
+    }
+
+    .envelope-hint {
+      font-size: 15px;
+      font-weight: 700;
+      color: #a8424b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .envelope-subhint {
+      font-size: 12.5px;
+      color: var(--text-sub);
+      margin-top: 4px;
+    }
+
+    /* The Unfolded Heartfelt Letter */
+    .letter-content {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #fffdfa;
+      border-radius: 20px;
+      margin-top: 14px;
+      text-align: left;
+      border: 1px dashed #f9a8a8;
+      box-shadow: inset 0 2px 8px rgba(255, 182, 182, 0.15);
+    }
+
+    .letter-box.open .letter-content {
+      max-height: 2000px;
+      opacity: 1;
+      padding: 22px 18px;
+      margin-top: 16px;
+    }
+
+    .letter-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ffe1df;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .letter-dear {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #9f3e44;
+    }
+
+    .letter-date {
+      font-size: 12px;
+      color: #aa9593;
+      font-style: italic;
+    }
+
+    .letter-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #4a3e3d;
+    }
+
+    .letter-body p {
+      margin-bottom: 12px;
+    }
+
+    .letter-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-quote {
+      background: #fff0ee;
+      border-left: 3.5px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 0 12px 12px 0;
+      margin: 14px 0;
+      font-style: italic;
+      color: #93383f;
+      font-size: 14.5px;
+    }
+
+    .letter-sign {
+      margin-top: 18px;
+      text-align: right;
+      font-family: 'Caveat', cursive;
+      font-size: 26px;
+      color: #e07a5f;
+    }
+
+    /* Vitamin Love Section */
+    .vitamin-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 22px 18px;
+      text-align: center;
+      border: 1px solid rgba(255, 204, 210, 0.7);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+    }
+
+    .vitamin-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #9c4146;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .vitamin-desc {
+      font-size: 13.5px;
+      color: var(--text-sub);
+      margin-bottom: 16px;
+    }
+
+    .vitamin-btn {
+      background: linear-gradient(135deg, #ff9aa2, #e07a5f);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(224, 122, 95, 0.35);
+      transition: all 0.25s ease;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .vitamin-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 9px 24px rgba(224, 122, 95, 0.45);
+    }
+
+    .vitamin-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Vitamin Message Display Box */
+    .vitamin-box {
+      min-height: 72px;
+      background: #fff7f5;
+      border: 1.5px dashed #fbbdbb;
+      border-radius: 16px;
+      margin-top: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #8b343a;
+      line-height: 1.6;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .vitamin-box.pop-anim {
+      animation: popMessage 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popMessage {
+      0% {
+        transform: scale(0.92);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: scale(1.04);
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Coupons / Free Pass Cards */
+    .coupons-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 22px 18px;
+      border: 1px solid rgba(255, 204, 210, 0.7);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .coupons-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .coupons-header h3 {
+      font-size: 18px;
+      color: #9c4146;
+      font-weight: 700;
+    }
+
+    .coupons-header p {
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    .coupon-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .coupon-item {
+      background: linear-gradient(135deg, #fff9f8 0%, #fff1ef 100%);
+      border: 1.5px dashed #ffa8a4;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .coupon-item:active {
+      transform: scale(0.98);
+      background: #ffebe8;
+    }
+
+    .coupon-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .coupon-icon {
+      font-size: 26px;
+      background: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(224, 122, 95, 0.15);
+      flex-shrink: 0;
+    }
+
+    .coupon-text {
+      text-align: left;
+    }
+
+    .coupon-title {
+      font-weight: 700;
+      font-size: 14.5px;
+      color: #7b2930;
+      margin-bottom: 2px;
+    }
+
+    .coupon-sub {
+      font-size: 12.5px;
+      color: #8c6e6c;
+    }
+
+    .coupon-status {
+      font-size: 11px;
+      background: #ffdedb;
+      color: #d44d57;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Footer Note */
+    .footer-note {
+      text-align: center;
+      padding: 10px 0 20px;
+      font-size: 13.5px;
+      color: #9e7f7d;
+      line-height: 1.6;
+    }
+
+    .footer-note span {
+      color: #e07a5f;
+      font-weight: 700;
+    }
+
+    /* Floating Heart Blast Animation */
+    .heart-blast {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: floatUpFade 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      font-size: 24px;
+    }
+
+    @keyframes floatUpFade {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.5);
+      }
+
+      50% {
+        transform: translate(var(--tx, 0), var(--ty, -60px)) scale(1.3);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx, 0), var(--ty, -130px)) scale(0.8);
+      }
+    }
+
+    /* Toast Notification */
+    .toast-popup {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(74, 46, 48, 0.94);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      z-index: 10000;
+      opacity: 0;
+      transition: all 0.35s ease;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .toast-popup.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Fade In Animation */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Falling Background Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Background Duet/Lofi Audio -->
+  <audio id="bg-audio" loop preload="auto">
+    <!-- Using a gentle, royalty-free relaxing piano/acoustic melody suitable for sweet comfort -->
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=sweet-love-111309.mp3"
+      type="audio/mp3">
+  </audio>
+
+  <!-- Audio Toggle Button -->
+  <button id="music-toggle" class="music-btn" aria-label="Bật/Tắt nhạc nhẹ">
+    🎵
+  </button>
+
+  <div class="mobile-wrapper">
+
+    <!-- Header Section -->
+    <header class="header-card">
+      <div class="header-badge">💌 Trạm Sạc Năng Lượng Cho Hiền</div>
+      <h1 class="header-title">Về nhà rồi, đừng lo nữa<br><span class="hien-name">Hiền bé bỏng 🌸</span></h1>
+      <p class="header-sub">Biết em trưa nay đi làm về mệt rã rời, hãy tháo balo xuống, nằm xuống nệm êm và để anh vỗ về
+        em một chút nhé...</p>
+    </header>
+
+    <!-- Interactive Envelope & Letter -->
+    <section class="letter-section">
+      <div class="envelope-box" id="envelope-trigger">
+        <div class="envelope-visual">
+          <span class="envelope-seal">💌</span>
+        </div>
+        <div class="envelope-hint">
+          <span>Chạm vào đây để mở thư cho em</span> ✨
+        </div>
+        <div class="envelope-subhint">Bức thư anh gửi riêng cho công chúa nhỏ của anh</div>
+
+        <!-- The Unfolded Letter -->
+        <div class="letter-content" id="letter-content">
+          <div class="letter-header">
+            <span class="letter-dear">Gửi em bé Hiền ngoan,</span>
+            <span class="letter-date">Hôm nay & Mãi sau này</span>
+          </div>
+
+          <div class="letter-body">
+            <p>Trưa nay thấy em bước về với đôi mắt mệt mỏi và bao nhiêu áp lực đè nặng trong lòng, anh thương em nhiều
+              lắm.</p>
+
+            <p>Anh biết thời gian qua em đã luôn nỗ lực hết mình trong công việc, chịu đựng những điều khó chịu và cả
+              những áp lực chẳng đáng có. Em đã rất kiên cường và giỏi giang rồi, em biết không?</p>
+
+            <div class="highlight-quote">
+              "Nếu công việc làm em kiệt sức, em cứ nghỉ đi. Đừng tự trách mình, vì sức khỏe và nụ cười của em mới là
+              điều quan trọng nhất trần đời."
+            </div>
+
+            <p>Quyết định nghỉ việc không phải là từ bỏ hay thua cuộc, mà là dũng cảm khép lại một cánh cửa ngột ngạt để
+              mở ra một chặng đường mới bình yên hơn. Anh hoàn toàn ủng hộ em.</p>
+
+            <p>Em không cần phải một mình gồng gánh thế giới đâu. Bão giông ngoài kia cứ để anh lo, em chỉ cần về bên
+              anh, ăn thật no, ngủ một giấc thật sâu và lại là cô gái nhỏ vô tư của anh nhé.</p>
+
+            <p>Bất cứ lúc nào, anh cũng luôn ở ngay đây, phía sau lưng em.</p>
+
+            <div class="letter-sign">Thương em nhất trần đời ❤️</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vitamin Love Button -->
+    <section class="vitamin-card">
+      <div class="vitamin-title">
+        <span>💊</span> Nạp Vitamin Yêu Thương
+      </div>
+      <p class="vitamin-desc">Mỗi lần chạm là một lời động viên và một nghìn cái ôm ấm áp gửi đến Hiền.</p>
+
+      <button class="vitamin-btn" id="btn-vitamin">
+        <span>💖</span> Chạm để nạp năng lượng!
+      </button>
+
+      <div class="vitamin-box" id="vitamin-text">
+        "Hiền chỉ cần khỏe mạnh, vui vẻ thôi, mọi khó khăn khác cứ để anh lo nhé! 🌸"
+      </div>
+    </section>
+
+    <!-- Coupons / Free Pass Section -->
+    <section class="coupons-card">
+      <div class="coupons-header">
+        <h3>🎟️ Vé Đặc Quyền Của Hiền</h3>
+        <p>Hạn sử dụng: Vĩnh viễn (chạm vào phiếu để dùng ngay!)</p>
+      </div>
+
+      <div class="coupon-list">
+        <!-- Coupon 1 -->
+        <div class="coupon-item"
+          onclick="useCoupon('Một cái ôm thật chặt và ấm áp đang được gửi đến Hiền ngay lập tức! 🤗')">
+          <div class="coupon-left">
+            <div class="coupon-icon">🫂</div>
+            <div class="coupon-text">
+              <div class="coupon-title">Ôm chặt bất cứ lúc nào</div>
+              <div class="coupon-sub">Khi Hiền thấy mệt, sà vào lòng anh ngay</div>
+            </div>
+          </div>
+          <span class="coupon-status">Miễn phí 100%</span>
+        </div>
+
+        <!-- Coupon 2 -->
+        <div class="coupon-item"
+          onclick="useCoupon('Anh luôn ở đây, sẵn sàng nghe Hiền xả stress cả ngày lẫn đêm! 🎧')">
+          <div class="coupon-left">
+            <div class="coupon-icon">👂</div>
+            <div class="coupon-text">
+              <div class="coupon-title">Lắng nghe tâm sự 24/7</div>
+              <div class="coupon-sub">Cứ xả hết bực bội, anh không bao giờ phán xét</div>
+            </div>
+          </div>
+          <span class="coupon-status">Không giới hạn</span>
+        </div>
+
+        <!-- Coupon 3 -->
+        <div class="coupon-item"
+          onclick="useCoupon('Hôm nay Hiền thèm món gì nào? Lên đồ thôi anh đèo đi ăn liền! 🍜🍰')">
+          <div class="coupon-left">
+            <div class="coupon-icon">🍲</div>
+            <div class="coupon-text">
+              <div class="coupon-title">Ăn sạch cả thế giới</div>
+              <div class="coupon-sub">Đồ ngọt, trà sữa, lẩu nướng chiều theo ý em</div>
+            </div>
+          </div>
+          <span class="coupon-status">Anh bao trọn gói</span>
+        </div>
+
+        <!-- Coupon 4 -->
+        <div class="coupon-item"
+          onclick="useCoupon('Đã kích hoạt chế độ: Hiền được lười, ngủ nướng và không phải làm gì cả! 🛏️✨')">
+          <div class="coupon-left">
+            <div class="coupon-icon">🧸</div>
+            <div class="coupon-text">
+              <div class="coupon-title">Ngày 'Cho phép em được lười'</div>
+              <div class="coupon-sub">Nằm lướt TikTok, đắp chăn, việc nhà để anh</div>
+            </div>
+          </div>
+          <span class="coupon-status">Vô điều kiện</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-note">
+      Trang web này được tạo ra để nhắc rằng:<br>
+      Hiền luôn là <span>điều tuyệt vời nhất</span> của anh. Yêu em! 🌿💕
+    </footer>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-popup">Thông báo</div>
+
+  <script>
+    /* --- 1. Background Music Controller with Auto-Synthesizer Fallback --- */
+    const audio = document.getElementById('bg-audio');
+    const musicBtn = document.getElementById('music-toggle');
+    let isPlaying = false;
+    let audioCtx = null;
+    let synthTimer = null;
+
+    // Web Audio gentle piano/kalimba chord synthesizer (guarantees sweet sound even without external network)
+    function playGentleSynthMusic() {
+      if (isPlaying) return;
+      try {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const melody = [
+          [261.63, 329.63, 392.00], // C major
+          [220.00, 261.63, 329.63], // A minor
+          [174.61, 220.00, 261.63], // F major
+          [196.00, 246.94, 293.66], // G major
+          [261.63, 329.63, 392.00, 523.25] // C maj 7
+        ];
+        let step = 0;
+
+        function playChord() {
+          if (!isPlaying || !audioCtx) return;
+          const notes = melody[step % melody.length];
+          step++;
+
+          notes.forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.12);
+
+            gain.gain.setValueAtTime(0, audioCtx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.045, audioCtx.currentTime + idx * 0.12 + 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + idx * 0.12 + 2.8);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(audioCtx.currentTime + idx * 0.12);
+            osc.stop(audioCtx.currentTime + idx * 0.12 + 3.0);
+          });
+
+          synthTimer = setTimeout(playChord, 3000);
+        }
+
+        isPlaying = true;
+        musicBtn.classList.add('playing');
+        musicBtn.innerHTML = '🎶';
+        playChord();
+      } catch (e) {
+        console.log("Audio Context initialized error: ", e);
+      }
+    }
+
+    function startMusic() {
+      audio.volume = 0.55;
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isPlaying = true;
+          musicBtn.classList.add('playing');
+          musicBtn.innerHTML = '🎶';
+        }).catch(() => {
+          // Fallback to soothing Web Audio synth
+          playGentleSynthMusic();
+        });
+      } else {
+        playGentleSynthMusic();
+      }
+    }
+
+    function toggleMusic() {
+      if (isPlaying) {
+        audio.pause();
+        if (synthTimer) clearTimeout(synthTimer);
+        isPlaying = false;
+        musicBtn.classList.remove('playing');
+        musicBtn.innerHTML = '🔇';
+        showToast("Đã tắt nhạc nhẹ 🌙");
+      } else {
+        startMusic();
+        showToast("Đang phát nhạc êm dịu cho Hiền 🎵");
+      }
+    }
+
+    musicBtn.addEventListener('click', toggleMusic);
+
+    /* --- 2. Interactive Letter Click & Open --- */
+    const envelope = document.getElementById('envelope-trigger');
+    let hasOpenedOnce = false;
+
+    envelope.addEventListener('click', function (e) {
+      if (e.target.closest('#btn-vitamin') || e.target.closest('.coupon-item')) return;
+
+      this.classList.toggle('opened');
+      this.classList.toggle('open');
+
+      if (!hasOpenedOnce) {
+        hasOpenedOnce = true;
+        // Start background music when opening letter if not already playing
+        if (!isPlaying) {
+          startMusic();
+        }
+        triggerConfetti(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight / 2);
+        showToast("Anh luôn ở đây lắng nghe và yêu thương Hiền 💕");
+      }
+    });
+
+    /* --- 3. Vitamin Love Generator --- */
+    const quotes = [
+      "Hôm nay mệt rồi, việc gì chưa xong cứ để đó, sức khỏe của Hiền là số 1! 🌸",
+      "Nghỉ việc không có gì đáng sợ cả, vì đã có anh luôn đứng sau làm chỗ dựa cho em! 💪",
+      "Em bé Hiền của anh hôm nay đã cố gắng rất nhiều rồi, tự thưởng cho mình một giấc ngủ thật ngon nhé! 🛌",
+      "Ngoài kia ai làm em buồn, về đây anh ôm cái là tan biến hết liền! 🫂",
+      "Anh tự hào về em, dù em đưa ra bất cứ quyết định nào! Luôn bên em 💖",
+      "Mệt thì cứ nghỉ ngơi, thèm gì anh mua, thích đi đâu anh đưa đi! 🍨🚗",
+      "Đừng lo lắng về tương lai, có anh cùng san sẻ với Hiền mọi điều rồi! 🌟",
+      "Hiền cười lên một cái là cả bầu trời của anh sáng bừng rồi đấy! 🥰"
+    ];
+
+    const btnVitamin = document.getElementById('btn-vitamin');
+    const vitaminText = document.getElementById('vitamin-text');
+    let lastQuoteIndex = -1;
+
+    btnVitamin.addEventListener('click', function (e) {
+      e.stopPropagation();
+
+      // Ensure fresh quote
+      let randIdx;
+      do {
+        randIdx = Math.floor(Math.random() * quotes.length);
+      } while (randIdx === lastQuoteIndex && quotes.length > 1);
+      lastQuoteIndex = randIdx;
+
+      vitaminText.classList.remove('pop-anim');
+      void vitaminText.offsetWidth; // Trigger reflow
+      vitaminText.innerHTML = quotes[randIdx];
+      vitaminText.classList.add('pop-anim');
+
+      // Heart explosion at button position
+      const rect = btnVitamin.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      triggerConfetti(x, y);
+
+      if (!isPlaying) {
+        startMusic();
+      }
+    });
+
+    /* --- 4. Coupon Usage Toast & Burst --- */
+    function useCoupon(msg) {
+      showToast(msg);
+      // Small heart burst from screen center
+      triggerConfetti(window.innerWidth / 2, window.innerHeight * 0.7);
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      toast.innerText = text;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3200);
+    }
+
+    /* --- 5. Heart Confetti Burst Effect --- */
+    function triggerConfetti(x, y) {
+      const heartSymbols = ['💖', '🌸', '✨', '💕', '🌷', '🥰', '🤍'];
+      const count = 14;
+
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart-blast';
+        heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 50 + Math.random() * 90;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance - 40;
+
+        heart.style.left = `${x}px`;
+        heart.style.top = `${y}px`;
+        heart.style.setProperty('--tx', `${tx}px`);
+        heart.style.setProperty('--ty', `${ty}px`);
+        heart.style.fontSize = `${16 + Math.random() * 18}px`;
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 1200);
+      }
+    }
+
+    /* --- 6. Falling Petals & Hearts Canvas Background --- */
+    const canvas = document.getElementById('petals-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    class Petal {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * width;
+        this.y = -20 - Math.random() * 50;
+        this.size = 9 + Math.random() * 12;
+        this.speedY = 0.8 + Math.random() * 1.4;
+        this.speedX = (Math.random() - 0.5) * 1.2;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 1.8;
+        this.opacity = 0.35 + Math.random() * 0.45;
+        this.isHeart = Math.random() > 0.65; // Mix of petals & tiny soft hearts
+        this.color = Math.random() > 0.5 ? '#ffb7b2' : '#ffd3d0';
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * 0.015) + this.speedX;
+        this.rotation += this.rotSpeed;
+
+        if (this.y > height + 20 || this.x < -30 || this.x > width + 30) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.globalAlpha = this.opacity;
+
+        if (this.isHeart) {
+          // Draw tiny heart
+          ctx.fillStyle = '#f87171';
+          ctx.beginPath();
+          const s = this.size * 0.6;
+          ctx.moveTo(0, 0);
+          ctx.bezierCurveTo(-s, -s, -s * 1.5, s * 0.5, 0, s * 1.5);
+          ctx.bezierCurveTo(s * 1.5, s * 0.5, s, -s, 0, 0);
+          ctx.fill();
+        } else {
+          // Draw petal
+          ctx.fillStyle = this.color;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size * 0.9, this.size * 0.5, Math.PI / 4, 0, 2 * Math.PI);
+          ctx.fill();
+        }
+
+        ctx.restore();
+      }
+    }
+
+    const petals = Array.from({ length: 26 }, () => new Petal());
+
+    function animatePetals() {
+      ctx.clearRect(0, 0, width, height);
+      petals.forEach((p) => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animatePetals);
+    }
+
+    animatePetals();
+  </script>
+</body>
+
+</html>
